@@ -61,9 +61,6 @@ for nt in range(stim_info['n_trials']):
     trigger.write(0)
     win.flip()
     time.sleep(stim_info['isi'])
-    # while (clock.getTime() - t_start) < (stimulus_duration + isi):
-    #     pass # just wait
-
     ct+=1
 
 board.exit()
