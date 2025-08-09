@@ -1,6 +1,7 @@
 from psychopy import visual, core, monitors, plugins
 import numpy as np
 import scipy.io as sio
+import pyfirmata
 import time
 import random
 stim_info = dict()
@@ -15,6 +16,8 @@ stim_info['sz'] = 20
 # prepare stuff
 monitor = monitors.Monitor('experiment_calibrated') # figure out here monitor
 win = visual.Window(monitor.getSizePix(), screen=1, allowStencil=True, monitor=monitor, fullscr=False)
+board = pyfirmata.Arduino('COM3') 
+trigger = board.get_pin(f'd:7:o') # 'd' for digital, 'o' for output
 
 gabor = visual.GratingStim(win=win,
                               mask='circle',
@@ -46,11 +49,13 @@ for nt in range(stim_info['n_trials']):
     # choose  a position
     gabor.pos = (stim_info['y_pos'], stim_info['x_pos'])
     t_start = clock.getTime()
+    trigger.write(1)
     for frame_n in range(n_frames):
         gabor.setPhase(2 * clock.getTime() - t_start) # drift at 2hz
         gabor.setOri((0 + (clock.getTime() - t_start) * 180)%360)
         gabor.draw(win)
         win.flip()
+    trigger.write(0)
     win.flip() # gray screen 
     time.sleep(stim_info['isi'])
     ct+=1
