@@ -7,8 +7,8 @@ stim_info = dict()
 
 save_path = ''# your save path here
 stim_info['n_trials'] = 300
-stim_info['stimulus_duration'] = 2
-stim_info['isi'] = 4
+stim_info['stimulus_duration'] = 1
+stim_info['isi'] = 3
 stim_info['sz'] = 100
 
 # generate stuff
