@@ -65,3 +65,7 @@ for nt in range(stim_info['n_trials']):
     #     pass # just wait
 
     ct+=1
+
+board.exit()
+win.close()
+core.quit()

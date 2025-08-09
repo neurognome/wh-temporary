@@ -76,3 +76,7 @@ for nt in range(stim_info['n_trials']):
     win.flip()
     time.sleep(stim_info['isi'])
     ct+=1
+
+board.exit()
+win.close()
+core.quit()
